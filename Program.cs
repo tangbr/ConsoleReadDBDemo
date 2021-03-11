@@ -17,9 +17,10 @@ namespace Console26App1
 		static async Task Main()
 		{
             var p = new Program();
-            //       		await p.AddBooksAsync();
-                   await p.ReadBooksAsync_linq();
-          //  await p.UpdateBookAsync();
+            //   		await p.AddBooksAsync();
+            //     await ReadBooksAsync_linq();
+            await ReadBooksAsync();
+          //  await UpdateBookAsync();
         }
 
         private static async Task ReadBooksAsync()
@@ -33,13 +34,13 @@ namespace Console26App1
                             .ToListAsync();
 				foreach (var b in books)
                 {
-                    Console.WriteLine($"{b.Title}{b.Publisher}");
+                    Console.WriteLine($"{b.Title}                {b.Publisher}");
 				}
 			}
             Console.WriteLine();
         }
 
-        private async Task ReadBooksAsync_linq()
+        private static async Task ReadBooksAsync_linq()
         {
             using (var context = new BooksContext())
             {
@@ -49,13 +50,13 @@ namespace Console26App1
                             .ToListAsync();
                 foreach (var b in books)
                 {
-                    Console.WriteLine($"{b.Title}{b.Publisher}");
+                    Console.WriteLine($"{b.Title}                {b.Publisher}");
                 }
             }
             Console.WriteLine();
         }
 
-        private async Task AddBooksAsync()
+        private static async Task AddBooksAsync()
         {
             Console.WriteLine(nameof(AddBooksAsync));
             using (var context = new BooksContext())
@@ -73,7 +74,7 @@ namespace Console26App1
             Console.WriteLine();
         }
 
-        private async Task UpdateBookAsync()
+        private static async Task UpdateBookAsync()
 		{
             using (var context = new BooksContext())
 			{
@@ -92,7 +93,7 @@ namespace Console26App1
             Console.WriteLine();
 		}
 
-        private async Task DeleteBooksAsync()
+        private static async Task DeleteBooksAsync()
 		{
             using (var context = new BooksContext())
 			{
@@ -103,9 +104,6 @@ namespace Console26App1
 			}
             Console.WriteLine();
 		}
-
-
-
     }
 }
 
