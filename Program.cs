@@ -92,6 +92,18 @@ namespace Console26App1
             Console.WriteLine();
 		}
 
+        private async Task DeleteBooksAsync()
+		{
+            using (var context = new BooksContext())
+			{
+                var books = context.Books;
+                context.Books.RemoveRange(books);
+                int records = await context.SaveChangesAsync();
+                Console.WriteLine($"{records} records deleted");
+			}
+            Console.WriteLine();
+		}
+
 
 
     }
