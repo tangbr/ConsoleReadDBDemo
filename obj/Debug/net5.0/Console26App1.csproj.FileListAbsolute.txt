@@ -59,3 +59,4 @@ C:\Users\bruce\source\repos\Console26App1\obj\Debug\net5.0\Console26App1.dll
 C:\Users\bruce\source\repos\Console26App1\obj\Debug\net5.0\ref\Console26App1.dll
 C:\Users\bruce\source\repos\Console26App1\obj\Debug\net5.0\Console26App1.pdb
 C:\Users\bruce\source\repos\Console26App1\obj\Debug\net5.0\Console26App1.genruntimeconfig.cache
+C:\Users\bruce\source\repos\Console26App1\obj\Debug\net5.0\Console26App1.csprojAssemblyReference.cache

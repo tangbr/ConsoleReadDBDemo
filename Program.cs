@@ -27,7 +27,7 @@ namespace Console26App1
 			{
                 //        List<Book> books = await context.Books.ToListAsync();
                 List<Book> books = await context.Books.FromSqlRaw(
-                    $"SELECT * FROM Books")
+                    @"SELECT * FROM Books where Publisher = 'Wrox press'")
                             .ToListAsync();
 				foreach (var b in books)
                 {
