@@ -17,23 +17,41 @@ namespace Console26App1
 		static async Task Main()
 		{
             var p = new Program();
-     //       		await p.AddBooksAsync();
-            await p.ReadBooksAsync();
+            //       		await p.AddBooksAsync();
+                   await p.ReadBooksAsync_linq();
+          //  await p.UpdateBookAsync();
         }
 
-        private async Task ReadBooksAsync()
+        private static async Task ReadBooksAsync()
 		{
             using (var context = new BooksContext())
 			{
                 //        List<Book> books = await context.Books.ToListAsync();
                 List<Book> books = await context.Books.FromSqlRaw(
-                    @"SELECT * FROM Books where Publisher = 'Wrox press'")
+                 //   @"SELECT * FROM Books where Publisher = 'Wrox press'")
+                              @"SELECT * FROM Books")
                             .ToListAsync();
 				foreach (var b in books)
                 {
                     Console.WriteLine($"{b.Title}{b.Publisher}");
 				}
 			}
+            Console.WriteLine();
+        }
+
+        private async Task ReadBooksAsync_linq()
+        {
+            using (var context = new BooksContext())
+            {
+                //        List<Book> books = await context.Books.ToListAsync();
+                List<Book> books = await context.Books
+                    .Where(b => b.Publisher == "Wrox Press")
+                            .ToListAsync();
+                foreach (var b in books)
+                {
+                    Console.WriteLine($"{b.Title}{b.Publisher}");
+                }
+            }
             Console.WriteLine();
         }
 
@@ -54,6 +72,28 @@ namespace Console26App1
             }
             Console.WriteLine();
         }
+
+        private async Task UpdateBookAsync()
+		{
+            using (var context = new BooksContext())
+			{
+                int records = 0;
+                Book book = await context.Books
+                .Where(b => b.Title == "Professional C# 6 and .NET Core 1.0")
+                    .FirstOrDefaultAsync();
+
+                if (book!=null)
+				{
+                    book.Title = "Professional C# 7 and .NET Core 2.0";
+                    records = await context.SaveChangesAsync();
+				}
+                Console.WriteLine($"{records} record update");
+			}
+            Console.WriteLine();
+		}
+
+
+
     }
 }
 
