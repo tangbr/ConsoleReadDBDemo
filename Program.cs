@@ -17,7 +17,7 @@ namespace Console26App1
 		static async Task Main()
 		{
             var p = new Program();
-            //		await p.AddBooksAsync();
+     //       		await p.AddBooksAsync();
             await p.ReadBooksAsync();
         }
 
@@ -25,7 +25,10 @@ namespace Console26App1
 		{
             using (var context = new BooksContext())
 			{
-                List<Book> books = await context.Books.ToListAsync();
+                //        List<Book> books = await context.Books.ToListAsync();
+                List<Book> books = await context.Books.FromSqlRaw(
+                    $"SELECT * FROM Books")
+                            .ToListAsync();
 				foreach (var b in books)
                 {
                     Console.WriteLine($"{b.Title}{b.Publisher}");
